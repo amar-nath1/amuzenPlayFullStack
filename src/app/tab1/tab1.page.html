@@ -1,17 +1,145 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="home-page">
+  <ion-grid>
+    <ion-row *ngIf="!isLoggedIn">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Not signed in</ion-card-title>
+            <ion-card-subtitle>Sign in to access personalized features.</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button color="primary" (click)="login()">Log In</ion-button>
+            <ion-button fill="outline" (click)="signup()">Sign Up</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ng-container>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="hero-card">
+            <ion-card-header>
+              <ion-card-subtitle>Welcome back</ion-card-subtitle>
+              <ion-card-title>Play & Invest</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Combine gameplay and passive yields — play to earn, invest to grow.</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="stats-row">
+        <ion-col size="12" size-md="4">
+          <ion-card>
+            <ion-card-content class="stat">
+              <div class="label">Locked Cards</div>
+              <div class="value">
+                <ion-list lines="none">
+                  <ion-item *ngIf="userCards?.length === 0">
+                    <ion-label>No locked cards</ion-label>
+                  </ion-item>
+                  <ion-item *ngFor="let c of userCards">
+                    <ion-label>
+                      <div class="card-number">{{ c.number }}</div>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+              <div class="small">Locked numbers you purchased</div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="4">
+          <ion-card>
+            <ion-card-content class="stat">
+              <div class="label">Invested</div>
+              <div class="value">₹{{ investedValue }}</div>
+              <div class="small">Amount currently invested (Rs.9 per card)</div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <!-- <ion-col size="12" size-md="4">
+          <ion-card>
+            <ion-card-content class="stat">
+              <div class="label">Daily Yield</div>
+              <div class="value">+2.3%</div>
+              <div class="small">Estimated</div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col> -->
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" size-md="8">
+          <ion-card class="game-card">
+            <ion-card-header>
+              <ion-card-title>Quick Game</ion-card-title>
+              <ion-card-subtitle>Play to earn instant rewards</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="game-preview">
+                <img src="assets/icon/favicon.png" alt="game" />
+                <div class="game-info">
+                  <div class="hint">Win multipliers by completing challenges</div>
+                  <ion-button expand="block" color="primary" (click)="startGame()">Participate</ion-button>
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="4">
+          <ion-card class="invest-card">
+            <ion-card-header>
+              <ion-card-title>Invest</ion-card-title>
+              <ion-card-subtitle>Grow your balance</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="invest-stats">
+                <div class="line"><strong>Active Plans:</strong> 3</div>
+                <div class="line"><strong>Next Payout:</strong> 12h 34m</div>
+              </div>
+              <!-- <ion-button expand="block" color="secondary">Invest Now</ion-button> -->
+              <ion-button expand="block" fill="outline">Withdraw</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      
+    </ng-container>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Winners</ion-card-title>
+            <ion-card-subtitle>Leaderboards & activity</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list lines="none">
+              <ion-item *ngIf="winners?.length === 0">
+                <ion-label>No winners yet</ion-label>
+              </ion-item>
+              <ion-item *ngFor="let w of winners">
+                <ion-label>
+                  <h3>{{ w.name ? (w.name + ' —') : '' }} {{ w.number }}</h3>
+                  <p *ngIf="w.name">Winner</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

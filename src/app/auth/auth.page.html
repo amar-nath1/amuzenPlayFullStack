@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ mode === 'signin' ? 'Sign In' : 'Sign Up' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-page" fullscreen>
+  <ion-list>
+    <ion-item *ngIf="mode === 'signup'">
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <div class="actions">
+      <ion-button expand="block" (click)="submit()">{{ mode === 'signin' ? 'Sign In' : 'Create Account' }}</ion-button>
+      <ion-button expand="block" fill="clear" (click)="toggle()">{{ mode === 'signin' ? 'Create account' : 'Have an account? Sign in' }}</ion-button>
+    </div>
+  </ion-list>
+</ion-content>

@@ -64,6 +64,9 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/server/node_modules
+/server/.env
+/server/package-lock.json
 
 # System files
 .DS_Store

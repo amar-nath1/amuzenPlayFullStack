@@ -35,3 +35,92 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Import a clean web font (Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+html, body, app-root {
+	height: 100%;
+	background: var(--ion-background-color);
+	font-family: var(--ion-font-family);
+	color: #072033;
+}
+
+/* Constrain content and center */
+.ion-page, .home-page, .game-page {
+	display: block;
+}
+
+ion-content {
+	--background: transparent;
+}
+
+/* Card enhancements */
+ion-card {
+	border-radius: var(--ion-card-border-radius);
+	box-shadow: var(--ion-card-box-shadow);
+	background: var(--ion-card-background);
+	transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+ion-card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 12px 28px rgba(9,16,26,0.12);
+}
+
+.hero-card {
+	background: linear-gradient(90deg, rgba(11,79,108,0.95), rgba(14,165,164,0.95));
+	color: #fff;
+	box-shadow: 0 18px 40px rgba(11,79,108,0.14);
+}
+
+.stat .label {
+	font-size: 0.9rem;
+	color: rgba(9,16,26,0.6);
+}
+.stat .value {
+	font-weight: 700;
+	font-size: 1.15rem;
+	margin-top: 6px;
+}
+
+/* Number card styles */
+.num-card {
+	--background: linear-gradient(180deg, #ffffff, #fbfdff);
+	padding: 8px;
+}
+.num-card .number {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 1.05rem;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.locked-card .big {
+	font-family: 'Roboto Mono', monospace;
+	color: var(--ion-color-primary);
+}
+
+/* Buttons */
+ion-button {
+	--border-radius: var(--ion-border-radius);
+}
+
+/* Lists and labels */
+ion-list ion-item ion-label h3 {
+	margin: 0;
+	font-weight: 600;
+}
+
+/* Responsive container width */
+ion-grid {
+	max-width: var(--app-max-width);
+	margin: 0 auto;
+}
+
+/* Footer subtle text */
+.small {
+	color: rgba(9,16,26,0.55);
+	font-size: 0.85rem;
+}
+
