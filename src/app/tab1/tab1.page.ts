@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCol, IonButton, IonCardSubtitle, IonRow, IonGrid, IonList, IonItem, IonLabel, IonBadge } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { RenamePipe } from '../pipes/rename.pipe';
 
 @Component({
   selector: 'app-tab1',
@@ -11,10 +12,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   imports: [HttpClientModule, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonButton, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge
-    , CommonModule
+    , CommonModule, RenamePipe
   ],
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+  public userData: any;
   userCards: Array<{ number: string; purchasedAt?: string; orderId?: string }> = [];
   investedValue = 0; // in rupees
   isLoggedIn = false;
@@ -24,6 +26,12 @@ export class Tab1Page {
     this.isLoggedIn = !!localStorage.getItem('token');
     if (this.isLoggedIn) this.loadUserData();
     this.loadWinners();
+    console.log('conturctor called');
+  }
+
+  ngOnInit() {
+    this.userData = JSON.parse(localStorage.getItem('user') || 'null');
+    console.log('ngOnInit called, userData:', this.userData);
   }
 
   startGame() {

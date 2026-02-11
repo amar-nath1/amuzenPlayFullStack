@@ -36,6 +36,8 @@ export class AuthPage {
         localStorage.setItem('token', res.token);
       } else {
         const res: any = await this.http.post(`${BACKEND}/api/auth/signin`, { email: this.email, password: this.password }).toPromise();
+        console.log('signin res', res);
+        localStorage.setItem('user', JSON.stringify(res.user));
         localStorage.setItem('token', res.token);
       }
       // navigate back

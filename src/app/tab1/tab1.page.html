@@ -27,6 +27,7 @@
           <ion-card class="hero-card">
             <ion-card-header>
               <ion-card-subtitle *ngIf="isLoggedIn">Welcome back</ion-card-subtitle>
+              <p style="color: white;">{{ userData.email | rename:true:'no'}}</p>
               <ion-card-title class="card2">Play & Invest</ion-card-title>
             </ion-card-header>
             <ion-card-content>
