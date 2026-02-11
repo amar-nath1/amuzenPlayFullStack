@@ -26,8 +26,8 @@
         <ion-col size="12">
           <ion-card class="hero-card">
             <ion-card-header>
-              <ion-card-subtitle>Welcome back</ion-card-subtitle>
-              <ion-card-title>Play & Invest</ion-card-title>
+              <ion-card-subtitle *ngIf="isLoggedIn">Welcome back</ion-card-subtitle>
+              <ion-card-title class="card2">Play & Invest</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <p>Combine gameplay and passive yields — play to earn, invest to grow.</p>
@@ -88,7 +88,7 @@
             </ion-card-header>
             <ion-card-content>
               <div class="game-preview">
-                <img src="assets/icon/favicon.png" alt="game" />
+                <img src="https://fastly.picsum.photos/id/30/1280/901.jpg?hmac=A_hpFyEavMBB7Dsmmp53kPXKmatwM05MUDatlWSgATE" alt="game" />
                 <div class="game-info">
                   <div class="hint">Win multipliers by completing challenges</div>
                   <ion-button expand="block" color="primary" (click)="startGame()">Participate</ion-button>
