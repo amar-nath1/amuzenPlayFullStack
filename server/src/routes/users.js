@@ -12,7 +12,13 @@ router.get('/me', auth, (req, res) => {
 
 router.get('/cards', auth, async (req, res) => {
   const user = await User.findById(req.user._id).exec();
-  res.json({ cards: user.cards || [] });
+  let arr = [ { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 3, name: "Charlie" },
+  { id: 4, name: "Diana" },
+  { id: 5, name: "Ethan" }];
+  // res.json({ cards: user.cards || [] });
+  res.json({ cards: arr || []});
 });
 
 router.post('/update', auth, async (req, res) => {

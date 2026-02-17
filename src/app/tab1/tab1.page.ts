@@ -1,10 +1,12 @@
 import { Component, OnInit  } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCol, IonButton, IonCardSubtitle, IonRow, IonGrid, IonList, IonItem, IonLabel, IonBadge } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { RenamePipe } from '../pipes/rename.pipe';
+
+import { environment } from '../../environments/environment.development'
 
 @Component({
   selector: 'app-tab1',
@@ -22,7 +24,9 @@ export class Tab1Page implements OnInit {
   isLoggedIn = false;
   winners: Array<{ number: string; name?: string | null }> = [];
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient,
+    private route: ActivatedRoute
+  ) {
     this.isLoggedIn = !!localStorage.getItem('token');
     if (this.isLoggedIn) this.loadUserData();
     this.loadWinners();
@@ -30,6 +34,7 @@ export class Tab1Page implements OnInit {
   }
 
   ngOnInit() {
+    this.userCards = this.route.snapshot.data['user'];
     this.userData = JSON.parse(localStorage.getItem('user') || 'null');
     console.log('ngOnInit called, userData:', this.userData);
   }
@@ -45,14 +50,8 @@ export class Tab1Page implements OnInit {
       return;
     }
     this.isLoggedIn = true;
-    const BACKEND = 'http://localhost:4000';
-    try {
-      const res: any = await firstValueFrom(this.http.get(`${BACKEND}/api/user/cards`, { headers: { Authorization: `Bearer ${token}` } }));
-      this.userCards = res.cards || [];
-      this.investedValue = (this.userCards.length || 0) * 9; // Rs.9 invested per purchase
-    } catch (e) {
-      console.error('loadUserData error', e);
-    }
+    
+    
   }
 
   async loadWinners() {
