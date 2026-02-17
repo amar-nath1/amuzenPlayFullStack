@@ -55,9 +55,9 @@ export class Tab1Page implements OnInit {
   }
 
   async loadWinners() {
-    const BACKEND = 'http://localhost:4000';
+    
     try {
-        const res: any = await firstValueFrom(this.http.get(`${BACKEND}/api/user/winners`));
+        const res: any = await firstValueFrom(this.http.get(`${environment.apiUrl}/user/winners`));
       this.winners = res.winners || [];
     } catch (e) {
       console.error('loadWinners error', e);
